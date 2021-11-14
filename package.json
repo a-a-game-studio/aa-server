@@ -1,0 +1,49 @@
+{
+  "name": "@a-a-game-studio/aa-serve",
+  "version": "1.0.0",
+  "description": "Base server application",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-a-game-studio/aa-server.git"
+  },
+  "keywords": [
+    "core"
+  ],
+  "author": "a-a-game-studio",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/a-a-game-studio/aa-server/issues"
+  },
+  "homepage": "https://github.com/a-a-game-studio/aa-server#readme",
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/cookie": "^0.4.1",
+    "@types/node": "^14",
+    "@types/uuid": "^7.0.4",
+    "@types/ws": "^8.2.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "server": "node ./lib/run.js",
+    "watch": "tsc-watch --outDir ./lib --onSuccess \"npm run server\""
+  },
+  "dependencies": {
+    "@a-a-game-studio/aa-components": "^1.1.44",
+    "cookie": "^0.4.1",
+    "tsc-watch": "^4.2.3",
+    "uuid": "^3.4.0",
+    "ws": "^8.2.3"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  }
+}
