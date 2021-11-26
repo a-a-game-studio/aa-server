@@ -2,8 +2,8 @@
   "name": "@a-a-game-studio/aa-server",
   "version": "1.0.4",
   "description": "Base server application",
-  "main": "lib/src/index.js",
-  "types": "lib/src/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "engines": {
     "node": ">=14"
   },
