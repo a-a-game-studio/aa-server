@@ -31,6 +31,7 @@
     "@types/ws": "^8.2.0"
   },
   "scripts": {
+    "release": "npm run build:dev && npm run build:prod",
     "build": "tsc",
     "server": "node ./lib/run.js",
     "watch": "tsc-watch --outDir ./lib --onSuccess \"npm run server\""
