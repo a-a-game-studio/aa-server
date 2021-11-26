@@ -1,6 +1,6 @@
 {
   "name": "@a-a-game-studio/aa-server",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Base server application",
   "main": "lib/src/index.js",
   "types": "lib/src/index.d.ts",
