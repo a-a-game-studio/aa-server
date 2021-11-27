@@ -115,6 +115,7 @@ export class AAServer {
 			vCtx.req = req;
 			vCtx.res = res;
 			vCtx.cookies = cookie.parse(req.headers.cookie || '');
+            vCtx.headers = req.headers;
 
 			const baseURL = `${<string>(<any>req).protocol}://${req.headers.host}/`;
 			vCtx.url = new URL(req.url, baseURL);
@@ -147,6 +148,8 @@ export class AAServer {
 			vCtx.req = req;
 			vCtx.ws = ws;
 			vCtx.cookies = cookie.parse(req.headers.cookie || '');
+            vCtx.headers = req.headers;
+
 			const baseURL = `${<string>(<any>req).protocol}://${req.headers.host}/`;
 			vCtx.url = new URL(req.url, baseURL);
 

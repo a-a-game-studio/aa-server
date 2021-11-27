@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import http, { IncomingMessage } from 'http';
+import http, { IncomingHttpHeaders, IncomingMessage } from 'http';
 import { WebSocketServer, WebSocket, ClientOptions } from 'ws';
 import { v4 as uuidv4 } from 'uuid';
 import { AAServer } from './AAServer';
@@ -41,6 +41,9 @@ export class AAContext {
 
 	/** соединение WebSocket */
 	ws:WebSocket = null;
+
+    /** заголовки */
+    headers:IncomingHttpHeaders = {};
 
 	/** Словарь cookies */
 	cookies:Record<string, string> = {};
