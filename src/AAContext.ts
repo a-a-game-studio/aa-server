@@ -55,7 +55,7 @@ export class AAContext {
 	param:Record<string, string> = {};
 
 	/** Тело/данные запроса */
-	body:any = {};
+	body:object = {};
 
 	/** Позиция контекста */
 	protected pos = 0;
