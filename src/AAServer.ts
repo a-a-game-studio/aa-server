@@ -102,11 +102,9 @@ export class AAServer {
 
 	/** прослушивание HTTP */
 	listen(port:number, host = '127.0.0.1', fn?: () => void) {
-		console.log('listen');
+
 		this.vHttpServer = http.createServer(async (req:http.IncomingMessage, res:http.ServerResponse) => {
 			res.setHeader('Content-Type', 'application/json; charset=utf-8;');
-
-			console.log('req', req.url);
 
 			const vCtx = new AAContext();
 			vCtx.app = this;
