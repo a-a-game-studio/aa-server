@@ -172,7 +172,6 @@ export class AAContext {
 
 	/** Отправка ответа */
 	send(data:string): void {
-		console.log('SEND>>>', this.url.pathname);
 		this.res.end(data);
 	}
 
@@ -216,16 +215,9 @@ export class AAContext {
 
 			aFindParam = [];
 
-			console.log('');
-			console.log('asRouteParam>>>', asRouteParamChunk);
-			console.log('asPathNameChunk>>>', asPathNameChunk);
-			console.log('');
-
 			for (let j = 0; j < asPathNameChunk.length; j++) {
 				const sRouteParamChunk = asRouteParamChunk[j];
 				const sPathNameChunk = asPathNameChunk[j];
-
-				console.log('==============Chunk>', sRouteParamChunk, ' == ', sPathNameChunk);
 
 				if (bFindRoute) {
 					break;

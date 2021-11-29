@@ -58,7 +58,6 @@ export class AAServer {
 				const aRouteParamValue:string[] = [];
 				const aRouteParam = sRoute.split('/').map(el => {
 					let sTpl = el;
-					console.log('>>>', sTpl);
 					if (el.indexOf(':') >= 0) {
 						sTpl = ':';
 						aRouteParamValue.push(el.replace(':', ''));
@@ -66,7 +65,6 @@ export class AAServer {
 					return sTpl;
 				});
 
-				console.log('aRouteParam>>>>', aRouteParam);
 				const sRouteParam = aRouteParam.join('/');
 
 				if (this.ixGetRouteParam[sRouteParam]) {
