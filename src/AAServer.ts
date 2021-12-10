@@ -17,11 +17,20 @@ export class AAServer {
 	/** Словарь Get запросов с параметрами */
 	ixGetRouteParam:Record<string, GetRouteParamI> = {};
 
-	/** Словаро Get запросов */
+	/** Словарь WS запросов */
 	ixWsRoute:Record<string, (ctx:AAContext) => void> = {};
 
-	/** Промежуточные действия - до обработки запроса */
+	/**
+	 * Промежуточные действия - до обработки запроса
+	 * при http/ws соединении
+	 */
 	afMiddleware:((ctx:AAContext) => void)[] = [];
+
+	/**
+	 * Промежуточные действия - до обработки запроса
+	 * при http/ws соединении и каждом ws-сообщении
+	 */
+	afWsMiddleware:((ctx:AAContext) => void)[] = [];
 
 	/** HttpServer */
 	vHttpServer:http.Server = null;
@@ -32,9 +41,22 @@ export class AAServer {
 	/** Функция для обработки ошибок */
 	fError: (ctx:AAContext) => void = null;
 
-	/** цепочка загрузки */
+	/** Использовать мидлваре при http/ws соединении */
 	use(fn: (ctx:AAContext) => void) {
+		// добавляем в обычную очередь мидлваре
 		this.afMiddleware.push(fn);
+	}
+
+	/** Использовать мидлваре при http/ws соединении и каждом ws-сообщении */
+	useWs(fn: (ctx:AAContext) => void) {
+		this.use(fn);
+		this.useOnlyWs(fn);
+	}
+
+	/** Использовать только при каждом ws-сообщении */
+	useOnlyWs(fn: (ctx:AAContext) => void) {
+		// добавляем в отдельную очередь мидлваре, срабатывающих при каждом ws-сообщении
+		this.afWsMiddleware.push(fn)
 	}
 
 	/** Добавить маршруты */

@@ -104,7 +104,7 @@ export class AAContext {
 
 				this.ws.on('message', async (msg:string) => {
 					let vMsg:RequestWsI = null;
-
+				
 					try {
 						vMsg = JSON.parse(String(msg));
 					} catch (e) {
@@ -112,7 +112,8 @@ export class AAContext {
 						vMsg = {};
 					}
 
-					// console.log('MESSAGE:', vMsg.action, vMsg, bOk);
+					console.log('[WS-MESSAGE]: ', vMsg.action);
+				
 					// Проверка на ключ
 					if (this.wskey !== vMsg?.wskey) {
 						this.ok = false;
@@ -120,9 +121,15 @@ export class AAContext {
 
 					if (this.ok && vMsg && this.app.ixWsRoute[vMsg.action]) {
 						const vCtxMsg = new AAContext();
+						vCtxMsg.app = this.app;
 						vCtxMsg.req = this.req;
 						vCtxMsg.ws = this.ws;
 						vCtxMsg.body = vMsg.data;
+
+						// пропускаем через мидлвары, предназначенные для каждого ws-сообщения
+						if (this.app.afWsMiddleware[0]) {
+							this.app.afWsMiddleware[0](vCtxMsg);
+						}
 
 						this.app.ixWsRoute[vMsg.action](vCtxMsg);
 					}
@@ -172,7 +179,11 @@ export class AAContext {
 
 	/** Отправка ответа */
 	send(data:string): void {
-		this.res.end(data);
+		if(!this.ws) {
+			this.res.end(data);
+		} else {
+			this.ws.send(data);
+		}
 	}
 
 	/** остановить выполнение */
