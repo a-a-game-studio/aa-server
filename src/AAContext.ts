@@ -6,6 +6,7 @@ import { AAServer } from './AAServer';
 import { ErrorSys } from '@a-a-game-studio/aa-components';
 
 interface RequestWsI {
+    n?:number; // номер запроса
 	action?:string; // Действие
 	wskey?:string; // Ключ для доступа к учетным данным
 	data?:any;
@@ -20,6 +21,9 @@ export interface GetRouteParamI {
 export class AAContext {
 	/** Состояние контекста */
 	ok = true;
+
+    /** номер запроса */
+    n = 0;
 
 	/** wskey - ключ для поддержания WS соединения */
 	wskey = '';
@@ -123,6 +127,7 @@ export class AAContext {
 						vCtxMsg.req = this.req;
 						vCtxMsg.ws = this.ws;
 						vCtxMsg.body = vMsg.data;
+                        vCtxMsg.n = vMsg.n;
 
 						this.app.ixWsRoute[vMsg.action](vCtxMsg);
 					}
